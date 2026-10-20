@@ -1,6 +1,7 @@
 package ecommerce.config;
 
 import ecommerce.entity.Country;
+import ecommerce.entity.Order;
 import ecommerce.entity.State;
 import ecommerce.entity.Product;
 import ecommerce.entity.ProductCategory;
@@ -41,6 +42,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(ProductCategory.class, config, theUnsupportedActions);
         disableHttpMethods(Country.class, config, theUnsupportedActions);
         disableHttpMethods(State.class, config, theUnsupportedActions);
+        disableHttpMethods(Order.class, config, theUnsupportedActions);
         
         // call an internal helper method
         exposeIds(config);
