@@ -15,9 +15,7 @@ import com.stripe.model.PaymentIntent;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -80,13 +78,16 @@ public class CheckoutServiceImpl implements CheckoutService {
     @Override
     public PaymentIntent createPaymentIntent(PaymentInfo paymentInfo) throws StripeException {
 
-        List<String> paymentMethodTypes = new ArrayList<>();
-        paymentMethodTypes.add("card");
+        // payment_method_types is no longer supported by Stripe: payment methods
+        // are managed from the Dashboard. "never" keeps it to non-redirect methods (cards)
+        Map<String, Object> automaticPaymentMethods = new HashMap<>();
+        automaticPaymentMethods.put("enabled", true);
+        automaticPaymentMethods.put("allow_redirects", "never");
 
         Map<String, Object> params = new HashMap<>();
         params.put("amount", paymentInfo.getAmount());
         params.put("currency", paymentInfo.getCurrency());
-        params.put("payment_method_types", paymentMethodTypes);
+        params.put("automatic_payment_methods", automaticPaymentMethods);
 
         return PaymentIntent.create(params);
     }
