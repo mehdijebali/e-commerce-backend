@@ -2,8 +2,13 @@
   "properties": [
     {
       "name": "allowed.origins",
-      "type": "java.lang.String[]",
-      "description": "Origins allowed to make cross-origin (CORS) requests to the /api endpoints."
+      "type": "java.lang.String",
+      "description": "Origins allowed to call the API (CORS)."
+    },
+    {
+      "name": "stripe.key.secret",
+      "type": "java.lang.String",
+      "description": "Stripe API secret key."
     }
   ]
 }
